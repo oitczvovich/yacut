@@ -21,7 +21,7 @@ class URLMap(db.Model):
                 'yacut_redirect',
                 short=self.short,
                 _external=True)
-            )
+        )
 
     def from_dict(self, data):
         setattr(self, 'original', data['url'])
