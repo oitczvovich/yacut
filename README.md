@@ -130,7 +130,7 @@ pip install -r requirements.txt
 запустить оболочку flask shell
 выполнить команды:
 ```
->>>form yacut import db
+>>>from yacut import db
 >>>db.create_all()
 ```
 в корне проекта появится файл db.sqlite3
