@@ -1,5 +1,14 @@
 ![](https://img.shields.io/badge/Python-3.10-blue) ![](https://img.shields.io/badge/Flask-2.0.2-green) ![](https://img.shields.io/badge/Jinja2-3.0-red) ![](https://img.shields.io/badge/SQLAlchemy-1.4-yellow)
 # Yacut
+------------
+
+### Технологии в проекте
+🔹 Python 3.10
+🔹 Flask 2.0
+🔹 Jinja2 3.0
+🔹 SQLAlchemy 1.4
+
+------------
 
 ## Описание
 Сервис **[Yacut](https://github.com/oitczvovich/yacut)** для укорачивания ссылок с web интерфейсом и REST API.
@@ -69,14 +78,7 @@ API проекта доступен всем желающим. Сервис об
 }
 ```
 
-### Технологии в проекте
-🔹 Python 3.10
-🔹 Flask 2.0
-🔹 Jinja2 3.0
-🔹 SQLAlchemy 1.4
-
 ------------
-
 
 
 ## Развернуть локально
@@ -147,4 +149,3 @@ flask run
 ```bash
 e-mail: skalakcii@yandex.ru
 ```
-
