@@ -42,7 +42,7 @@ API проекта доступен всем желающим. Сервис об
 
 ### Примеры запросов
 
-#####**GET** `.../api/id/{short_id}/`
+**GET** `.../api/id/{short_id}/`
 *200*
 ```
 {
@@ -57,7 +57,7 @@ API проекта доступен всем желающим. Сервис об
 ```
 
 
-#####**POST** `.../api/id/`
+**POST** `.../api/id/`
 ```
 {
   "url": "string",
@@ -132,7 +132,7 @@ pip install -r requirements.txt
 запустить оболочку flask shell
 выполнить команды:
 ```
->>>form yacut import db
+>>>from yacut import db
 >>>db.create_all()
 ```
 в корне проекта появится файл db.sqlite3
