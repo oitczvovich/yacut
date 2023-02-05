@@ -4,11 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="img/fav/fav.ico" type="image">
-  <link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="img/fav/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="img/fav/favicon-16x16.png">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="icon" href="{{ url_for('static', filename='img/fav/fav.ico') }}" type="image">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/fav/apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/fav/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/fav/favicon-16x16.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <title>YaCut - укоротитель ссылок</title>
 </head>
 
@@ -33,7 +34,6 @@
       </div>
     </nav>
   </header>
-
   <main>
     <section class="container my-5 px-4">
       <h1 class="text-center"><span style="color:red">Ya</span>Cut</h1>
@@ -46,21 +46,32 @@
           <div class="col-sm">
           </div>
           <div class="col-sm">
-            <form>
+            <form method="POST" novalidate>
+            {{ form.csrf_token }}
+            <div>
               <div>
-                <div>
-                  <input type="text" class="form-control form-control-lg py-2 mb-3" id="form-title" name=""
-                    placeholder="Длинная ссылка">
-                  <p><span style="color:red">Текст возможной ошибки</span></p>
-                </div>
-                <div>
-                  <input type="url" class="form-control form-control-lg py-2 mb-3" id="form-link" name=""
-                    placeholder="Ваш вариант короткой ссылки">
-                  <p><span style="color:red">Текст возможной ошибки</span></p>
-                </div>
-
-                <input type="submit" class="btn btn-primary" value="Создать">
+                {{ form.original_link(class="form-control form-control-lg py-2 mb-3", id="form-title", 
+                  placeholder="Длинная ссылка") }}
+                <p>
+                  {% if form.original_link.errors %}
+                    {% for error in form.original_link.errors %}
+                      <span style="color: red">{{ error }}</span>
+                    {% endfor %}
+                  {% endif %}
+                </p>   
               </div>
+              <div>
+                {{ form.custom_id(class="form-control form-control-lg py-2 mb-3", id="form-link", placeholder="Ваш вариант короткой ссылки")}}
+                <p>
+                  {% if form.custom_id.errors %}
+                    {% for error in form.custom_id.errors %}
+                      <span style="color: red">{{ error }}</span>
+                    {% endfor %}
+                  {% endif %}
+                </p>
+              </div>
+              {{ form.submit(class="btn btn-primary", value="Создать")}}
+            </div>
             </form>
           </div>
           <div class="col-sm">
@@ -74,7 +85,18 @@
           </div>
           <div class="col-sm">
             <p class="text-center">
-            <h5 class="text-center">Пример информационного сообщения</h5>
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  {% for message in messages %}
+                    {{ message }}
+                  {% endfor %}
+                {% else%}
+                  {% if form.original_link.data %}
+                    <h5 class="text-center">Ваша новая ссылка готова:</h5>
+                    <a class="text-center" href="{{ form.original_link.data }} "> <h5>{{ custom_id }}</h5></a>
+                  {% endif %}
+                {% endif %}
+              {% endwith %}
             </p>
           </div>
           <div class="col-sm">
