@@ -15,6 +15,7 @@ ERROR_URL = 'Указан недопустимый URL'
 ERROR_SHORT_URL = 'Указано недопустимое имя для короткой ссылки'
 ID_NOT_FREE = 'Имя "{}" уже занято.'
 NOT_FOUND_ID = 'Указанный id не найден'
+CHECK_COUNT_SYMBOL = 16
 
 
 @app.route('/api/id/', methods=['POST'])
@@ -36,7 +37,7 @@ def create_short_link():
     if not data.get('custom_id'):
         data['custom_id'] = get_unique_short_id()
     custom_id = data['custom_id']
-    if len(custom_id) > 16 or not check_symbols(custom_id):
+    if len(custom_id) > CHECK_COUNT_SYMBOL or not check_symbols(custom_id):
         raise InvalidAPIUsage(ERROR_SHORT_URL)
     if check_unique_short_url(custom_id):
         raise InvalidAPIUsage(ID_NOT_FREE.format(data["custom_id"]))
